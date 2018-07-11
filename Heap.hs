@@ -1,8 +1,6 @@
 module Heap (Heap, emptyHeap, heapEmpty, findHeap, insHeap, delHeap) where
 
-  data (Ord a) => Heap a = EmptyHP | HP a Int (Heap a) (Heap a) deriving Show
-
-
+  data Heap a = EmptyHP | HP a Int (Heap a) (Heap a) deriving Show
 
   emptyHeap :: (Ord a) => Heap a
   emptyHeap = EmptyHP
