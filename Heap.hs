@@ -1,12 +1,11 @@
-module Heap (Heap, emptyHeap, heapEmpty, findHeap, insHeap, delHeap) where
+module Heap (Heap, emptyHeap, heapEmpty, findHeap, insHeap, delHeap, buildHeap, heapSort) where
 
   data Heap a = EmptyHP | HP a Int (Heap a) (Heap a) deriving Show
 
-  --emptyHeap :: (Ord a) => Heap a
+  emptyHeap :: Heap a
   emptyHeap :: Heap a
   emptyHeap = EmptyHP
 
-  --heapEmpty :: (Ord a) => Heap a -> Bool
   heapEmpty :: Heap a -> Bool
   heapEmpty EmptyHP = True
   heapEmpty _ = False
@@ -32,11 +31,27 @@ module Heap (Heap, emptyHeap, heapEmpty, findHeap, insHeap, delHeap) where
     | element1 <= element2 = makeHP element1 left1 (merge right1 heap2)
     | otherwise = makeHP element2 left2 (merge heap1 right2)
 
-  -- Merge Heap with root node containing element
+  -- Merge Heap with root node containing element - O(log n)
   insHeap :: (Ord a) => a -> Heap a -> Heap a
   insHeap element heap = merge (HP element 1 EmptyHP EmptyHP) heap
 
-  -- Merge root childrens
+  -- Merge root childrens - O(log n)
   delHeap :: (Ord a) => Heap a -> Heap a
   delHeap EmptyHP = error "delHeap: Empty Heap!"
   delHeap (HP element _ left right) = merge left right
+
+  -- O(n log n) build heap
+  buildHeap :: (Ord a) => [a] -> Heap a
+  buildHeap list = buildHeapAux list emptyHeap
+
+  buildHeapAux :: (Ord a) => [a] -> Heap a -> Heap a
+  buildHeapAux [] heap = heap
+  buildHeapAux (x:xs) heap = buildHeapAux xs (insHeap x heap)
+
+  -- O(n log n) sort list
+  heapSort :: (Ord a) => [a] -> [a]
+  heapSort list = heapSortAux (buildHeap list)
+
+  heapSortAux :: (Ord a) => Heap a -> [a]
+  heapSortAux heap | heapEmpty heap == True = []
+                   |otherwise = (findHeap heap) : heapSortAux (delHeap heap)
