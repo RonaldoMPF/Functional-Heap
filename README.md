@@ -2,7 +2,7 @@
 ## Heap Data Structure in Functional Paradigm - For Functional Programming Course 2018.1
 
 ### Description: 
-Implementation in Haskell of a Heap data structure based on the [Leftist Tree Model](http://www.dgp.toronto.edu/people/JamesStewar/378notes/10leftist/). The heap can change from MinHeap to Maxheap according to the **Haskell Ordering** attribute passed as parameter in its creation where:
+Implementation in Haskell of a Heap data structure based on the [Leftist Tree Model](http://www.dgp.toronto.edu/people/JamesStewar/378notes/10leftist/). The Heap can change from MinHeap to Maxheap according to the **Haskell Ordering** attribute passed as parameter in its creation where:
 
 * LT creates a MinHeap
 * GT creates a MaxHeap
@@ -11,7 +11,13 @@ The elements inserted in the Heap must be of the *TypeClass* **Ord** (Ordering),
 
 Based on the implementation contained in the book: [Algorithms: A Functional Programming Approach](https://www.amazon.com/Algorithms-Functional-Programming-Approach-International/dp/0201596040).
 
-#### API description:
+#### Table of Contents:
+1. **API Description**
+1. **Installation**
+1. **Usage**
+1. **Credits**
+
+#### API Description:
 
 ```haskell
   emptyHeap :: Ordering -> Heap a
@@ -21,7 +27,7 @@ Definition for an Empty Heap, receives an Ordering as a parameter indicating the
 ```haskell 
  heapEmpty :: Heap a -> Bool
 ```
-Test for an empty Heap, receive a Heap as parameter, and return True if it is empty, otherwise False.
+Test for an empty Heap, receive a Heap as parameter, and return **True** if it is empty, otherwise **False**.
 
 ```haskell
   findHeap :: (Ord a) => Heap a -> a
@@ -31,12 +37,12 @@ It looks for an element in the Heap, returning an error if the element is not pr
 ```haskell
   rank :: (Ord a) => Heap a -> Int
  ```
-Returns the **rank** of a last node as a parameter, which is an integer that represents the smallest number of edges of a node up to a leaf node, is an important value for maintenance of the Leftist Tree invariant. The rank of an empty node is zero.
+Returns the **Rank** of a last node as a parameter, which is an integer that represents the smallest number of edges of a node up to a leaf node, is an important value for maintenance of the Leftist Tree invariant. The Rank of an empty node is zero.
 
 ```haskell
  policy :: (Ord a) => Heap a -> Ordering
  ```
- Returns an Ordering corresponding to the Heap type passed as parameter, **LT** for MinHeap, **GT** for MaxHeap.
+ Returns an **Ordering** corresponding to the Heap type passed as parameter, **LT** for MinHeap, **GT** for MaxHeap.
 ```haskell
   makeHP :: (Ord a) => a -> Heap a -> Heap a -> Heap a
  ```
@@ -67,20 +73,14 @@ Returns a Heap constructed from elements in a list passed as a parameter, keepin
  ```
 Returns a list containing the same elements of the list passed as a parameter, they are sorted by the attribute of the **Ordering** type passed as a parameter, where LT is ascending ordering and GT is descending ordering. The ordering is done internally using a Heap and the Heapsort algorithm, runs at time **O(n log n)**.
 
-#### Table of Contents:
-
-1. **Installation**
-1. **Usage**
-1. **Credits**
-
-### 1. Installation
+### 2. Installation
 
 Just clone the repository.
 
-### 2. Usage
+### 3. Usage
 
 Load Heap.hs in GHCI or modify Main to run on GHC.
 
-### 3. Credits
+### 4. Credits
 Ronaldo Medeiros @RonaldoMPF
 Breno Souza @BrenoSouza
